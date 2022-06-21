@@ -1,28 +1,25 @@
+const style = 'Abacus';
+const stations = 6;
+const pods = 1;
+const laps = 2;
+const sets = 5;
+const timing = 'Lap1 - 20/10, 22/10, 24/10, 26/10, 28/15; Lap 2 - 28/10, 26/10, 24/10, 22/10, 20/15';
+const misc = 'No water breaks';
 
+let workoutList = []
 
-let workoutStyle = {
-    stations: 6,
-    pods: 1,
-    laps: 2,
-    sets: 5,
-    timing: 'Lap1 - 20/10, 22/10, 24/10, 26/10, 28/15; Lap 2 - 28/10, 26/10, 24/10, 22/10, 20/15',
-    misc: 'No water breaks.'
-}
-
-workoutList = []
-
-for (let i=0;i<workoutStyle.stations;i++) {
+for (let i=0;i<stations;i++) {
     workoutList.push('W'+(i+1))
 }
 workoutList.push('Rest-Stay Here')
 workoutList.push('Rest-Next Station')
 
-let timeList = [20,10,22,10,24,10,26,10,28,10];
+const timeList = [20,10,22,10,24,10,26,10,28,10];
 
-let numSets = workoutStyle.sets*workoutStyle.stations*workoutStyle.laps*2-1
+const numSets = sets*stations*laps*2-1
 
-workoutIndex = [];
-timeIndex = [];
+let workoutIndex = [];
+let timeIndex = [];
 for (let i=0;i<numSets;i++) {
     if (i%2===0) {
         //even is workout block
@@ -33,13 +30,28 @@ for (let i=0;i<numSets;i++) {
             timeIndex[i] = 8-(i%10)
         }
     } else if (i%10===9) {
-        workoutIndex[i] = workoutStyle.stations+1;
+        workoutIndex[i] = stations+1;
         timeIndex[i] = 9;
     } else {
-        workoutIndex[i] = workoutStyle.stations;
+        workoutIndex[i] = stations;
         timeIndex[i] = i%10;
     }
 }
 
-console.log(workoutIndex);
-console.log(timeIndex);
+const Abacus = {
+    style,
+    stations,
+    pods,
+    laps,
+    sets,
+    timing,
+    misc,
+    numsets,
+    workoutList,
+    workoutIndex,
+    timeList,
+    timeIndex
+}
+
+
+export default Abacus
