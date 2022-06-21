@@ -46,7 +46,7 @@ const Abacus = {
     sets,
     timing,
     misc,
-    numsets,
+    numSets,
     workoutList,
     workoutIndex,
     timeList,
