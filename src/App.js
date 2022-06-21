@@ -45,9 +45,9 @@ class App extends React.Component {
         {/* <button id="toggleWorkout" onClick={this.toggleWorkout}></button> */}
         {this.state.isWorkoutActive ? '1':'0'}
       
-        <div>
+        {/* <div>
           <MyTimer expiryTimestamp={this.state.time} />
-        </div>    
+        </div>     */}
       </div>
     );
   }
