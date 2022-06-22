@@ -1,4 +1,5 @@
 import React from 'react';
+import './SetupOptions.css';
 
 class SetupOptions extends React.Component {
     constructor(props) {

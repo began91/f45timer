@@ -1,7 +1,7 @@
 //import logo from './logo.svg';
 import React from 'react';
 import './App.css';
-import MyTimer from './components/MyTimer.js';
+// import MyTimer from './components/MyTimer.js';
 import WorkoutScreen from './components/WorkoutScreen.js';
 import SetupScreen from './components/SetupScreen';
 
