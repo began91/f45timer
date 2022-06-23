@@ -3,25 +3,18 @@ import CustomWorkoutSetup from './CustomWorkoutSetup.js';
 import WorkoutByDateSetup from './WorkoutByDateSetup.js';
 import SetupOptions from './SetupOptions';
 
-class SetupScreen extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render () {
-        return (
-            <div id="setupScreen">
-                <SetupOptions view={this.props.setupView} onViewChange={this.props.onViewChange}/>
-                
-                {this.props.setupView==='custom' ? 
-                (<CustomWorkoutSetup />) 
-                : 
-                (<WorkoutByDateSetup />)
-                }
-                <button id="startWorkout" onClick={this.props.toggleWorkout}>Start Workout</button>
-            </div>        
-        )
-    }
+export default function SetupScreen(props) {
+    return (
+        <div id="setupScreen">
+            <SetupOptions view={props.setupView} onViewChange={props.onViewChange}/>
+            
+            {props.setupView==='custom' ? 
+            (<CustomWorkoutSetup />) 
+            : 
+            (<WorkoutByDateSetup />)
+            }
+            <button id="startWorkout" onClick={()=>props.setWorkoutStatus(true)}>Start Workout</button>
+        </div>        
+    )
 }
 
-export default SetupScreen;

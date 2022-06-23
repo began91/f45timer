@@ -42,3 +42,10 @@
     transform: rotate(360deg);
   }
 }
+
+button {
+  color: "7ED9FF";
+  padding: 3px;
+  border-radius: 5px;
+  border: 2px outset;
+}
