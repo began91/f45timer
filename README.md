@@ -1,70 +1,29 @@
-# Getting Started with Create React App
+# F45 Timer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The [F45 Timer App](https://f45timer.com) creates a custom timer based on workouts from the popular fitness programs available at F45 gyms. The timer will guide you through various intervals of workouts and rest through a variety of workout stations. Your timed workouts can use the recommended curated workout stations that F45 has created, or you can easily create your own workout with stations based on your personal preferences and available equipment. Happy workouts!
 
-## Available Scripts
+# Getting Started
 
-In the project directory, you can run:
+Use your favorite web browser on your computer, tablet, or mobile device to navigate to [f45timer.com](https://f45timer.com).
 
-### `npm start`
+Select the date of the workout you'd like to complete, or navigate to the custom workout tab, where you can select your desired format and enter in your own workout stations.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Once you've picked the workout, simply click "Start Workout" and your timer will start. 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+You can select whether to include a timed warmup period or start the workout right away if you've already got the blood pumping!
 
-### `npm test`
+# Using the Timer
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+When the timer is displayed, you will be able to easily see your total elapsed time and time remaining for the workout at the top corners of the screen.
 
-### `npm run build`
+The current set time is displayed in large circle in the middle of the screen. Green background means workout, and red background means rest.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The workout station is shown underneath the countdown timer.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Buttons are available to go to the next or last set, pause/resume, or fast forward/rewind 5 seconds.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+When your workout is over or you hit the "End Workout" button, you'll be shown a summary of your workout and have the option to reset for your next go!
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# About
+ 
+The F45 Timer App was created out of a necessity to be able to conduct F45 style workouts from the comfort of your own home/gym. While nothing can replace the great workout environment at an F45 gym, this removes one of the variables - the complex timing systems that would be otherwise impossible to manage while also conducting the workout.
