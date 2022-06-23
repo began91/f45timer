@@ -5,7 +5,8 @@ class DatePicker extends React.Component {
         super(props)
 
         this.state = {
-            'displayCalendar': false
+            displayCalendar: false,
+            date: new Date()
         };
 
         this.changeDay = this.changeDay.bind(this);
@@ -22,15 +23,22 @@ class DatePicker extends React.Component {
     }
 
     setToday(e) {
+        this.setState({'date': new Date()})
         console.log(Date())
     }
 
     render() {
+        const options = {
+            weekday: 'short',
+            month: 'short',
+            day: 'numeric'
+        }
+
         return (
             <div id="DatePicker">
                 <button id='backMonth' value={-1} onClick={this.changeMonth}>bb</button>
                 <button id='backDay' value={-1} onClick={this.changeDay}>b</button>
-                <button id='currentDate'>June 18, 2022</button>
+                <button id='currentDate'>{this.state.date.toLocaleDateString(undefined, options)}</button>
                 <button id='nextDay' value={1} onClick={this.changeDay}>f</button>
                 <button id='nextMonth' value={1} onClick={this.changeMonth}>ff</button>
                 <br/>
