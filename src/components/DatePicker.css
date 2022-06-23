@@ -12,13 +12,21 @@
     min-width: 40px;
 }
 
-#month {
+#monthRow {
+    display: flex;
+}
+
+.month {
     background-color: green;
     color: white;
-    padding-left: 3px;
-    padding-right: 3px;
+}
+
+#week {
+    display:flex;
 }
 
 #day {
     font-weight: bold;
+    min-width: 38px;
+    flex: 0 1 auto;
 }
