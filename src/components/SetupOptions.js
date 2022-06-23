@@ -1,29 +1,21 @@
 import React from 'react';
 import './SetupOptions.css';
 
-class SetupOptions extends React.Component {
-    constructor(props) {
-        super(props)
-        this.handleViewChange = this.handleViewChange.bind(this);
+export default function SetupOptions(props) {
+    
+    const handleViewChange = (e) => {
+        props.onViewChange(e.target.value)
     }
 
-    handleViewChange(e) {
-        this.props.onViewChange(e.target.value);
-    }
-
-    render() {
-        return (
-            <div id="setupOptions">
-                <button className={this.props.view==='byDate' ? 'selected' : ''} value="byDate" onClick={this.handleViewChange}>
-                    Select Date
-                </button>
-                <button className={this.props.view==='custom' ? 'selected' : ''} value="custom" onClick={this.handleViewChange}>
-                    Custom Workout
-                </button>
-                {this.props.view}
-            </div>
-        )
-    }
+    return (
+        <div id="setupOptions">
+            <button className={props.view==='byDate' ? 'selected' : ''} value="byDate" onClick={handleViewChange}>
+                Select Date
+            </button>
+            <button className={props.view==='custom' ? 'selected' : ''} value="custom" onClick={handleViewChange}>
+                Custom Workout
+            </button>
+            {props.view}
+        </div>
+    )
 }
-
-export default SetupOptions;
