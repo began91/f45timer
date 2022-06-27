@@ -29,8 +29,18 @@ class Workout {
 let workoutsByDate = [
     new Workout(2022,7,3,'Bears'),
     new Workout(2022,7,2,'Bears'),
-    new Workout(2022,7,1,'Bears')
+    new Workout(2022,7,1,'Bears'),
+    new Workout(2022,6,26,'Abacus')
 ]
+
+function getWorkoutByDate(date) {
+    const datesMatch = (date1,date2) => date1.getDate()===date2.getDate();
+    const monthsMatch = (date1,date2) => date1.getMonth()===date2.getMonth();
+    const yearsMatch = (date1,date2) => date1.getFullYear()===date2.getFullYear();
+    const areDatesEqual = (date1,date2) => datesMatch(date1,date2) && monthsMatch(date1,date2) && yearsMatch(date1,date2);
+    
+    return workoutsByDate.find(workout=>areDatesEqual(workout.date,date));
+}
 
 export {
     // aircraftList, 
@@ -39,5 +49,6 @@ export {
     // instructorList,
     // getInstById,
     workoutStyleList,
-    workoutsByDate
+    workoutsByDate,
+    getWorkoutByDate
 };

@@ -4,7 +4,7 @@ import DaySquare from './DaySquare';
 
 export default function DatePicker(props) {
     // const [displayCalendar,setDisplayCalendar] = useState(false);
-    const [date, setDate] = useState(new Date());
+    const [date, setDate] = props.useDate;
     
     const changeWeek = (e) => {
         const newDate = new Date(date);
