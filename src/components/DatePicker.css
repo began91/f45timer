@@ -25,7 +25,7 @@
     display:flex;
 }
 
-#day {
+.day {
     font-weight: bold;
     min-width: 38px;
     flex: 0 1 auto;

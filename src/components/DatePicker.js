@@ -6,24 +6,12 @@ export default function DatePicker(props) {
     // const [displayCalendar,setDisplayCalendar] = useState(false);
     const [date, setDate] = useState(new Date());
     
-    // const changeDay = (e) => {
-    //     const newDate = new Date(date);
-    //     newDate.setDate(newDate.getDate()+ +e.target.value);
-    //     setDate(newDate);
-    // }
-    
     const changeWeek = (e) => {
         const newDate = new Date(date);
         newDate.setDate(newDate.getDate()+ 7*+e.target.value);
         setDate(newDate)
     }
-    
-    // const changeMonth = (e) => {
-    //     const newDate = new Date(date);
-    //     newDate.setMonth(newDate.getMonth()+ +e.target.value);
-    //     setDate(newDate)
-    // }
-    
+       
     const setToday = (e) => {
         setDate(new Date())
     }
