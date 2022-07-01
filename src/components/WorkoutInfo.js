@@ -30,6 +30,6 @@ export default function WorkoutInfo(props) {
                 <div id="workoutMisc">
                     Misc: {workout.misc}
                 </div>
-                <StationList stationList={workout.stationList} />
+                <StationList stationList={workout.stationList.filter((_,i)=>i<workout.stations)} />
             </div>)
 }

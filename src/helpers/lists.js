@@ -1,9 +1,11 @@
 import Bears from './Bears';
 import Abacus from './Abacus';
+import Piston from './Piston';
 
 const workoutStyleList = {
     Abacus,
-    Bears
+    Bears,
+    Piston
 };
 
 class Workout {
@@ -29,8 +31,9 @@ class Workout {
 let workoutsByDate = [
     new Workout(2022,7,3,'Bears'),
     new Workout(2022,7,2,'Bears'),
-    new Workout(2022,7,1,'Bears'),
-    new Workout(2022,6,26,'Abacus')
+    new Workout(2022,7,1,'Bears',['push','sit']),
+    new Workout(2022,6,26,'Abacus'),
+    new Workout(2022,6,28,'Piston',['Kettlebell deadlift tempo 4-0-1','Balance Trainer Chest Press Pulse','Dumbbell Goblet Squat Tempo 4-0-1','Suspension Trainer Nutral Grip Row Pulse','Sandbag Box Overhead Step Ups','10 x Russian Twist + 2 x Jackknives','Flat Bench Dumbbell Tempo Fly 4-0-1','Soft Box Single Leg Deadball Hip Thruster Pause','Barbell Bent Over Row Underhand Grip Tempo 4-0-1','Lateral Lunge Pause','Ybell Double Bicep Curl Twist Center Grip','Plank Rotation'])
 ]
 
 function getWorkoutByDate(date) {
