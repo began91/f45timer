@@ -1,29 +1,30 @@
 import React, { useState } from 'react';
 import './DatePicker.css';
 import DaySquare from './DaySquare';
+import {getWorkoutByDate} from '../helpers/lists.js';
 
 export default function DatePicker(props) {
     // const [displayCalendar,setDisplayCalendar] = useState(false);
-    const [date, setDate] = props.useDate;
+    const [workout, setWorkout] = props.useWorkout;
     
     const changeWeek = (e) => {
-        const newDate = new Date(date);
+        const newDate = new Date(workout.date);
         newDate.setDate(newDate.getDate()+ 7*+e.target.value);
-        setDate(newDate)
+        setWorkout(getWorkoutByDate(newDate));
     }
        
     const setToday = (e) => {
-        setDate(new Date())
+        setWorkout(getWorkoutByDate(new Date()));
     }
     
     const currentYear = new Date().getFullYear();
     
     let week = [];
-    week[0] = new Date(date);
-    week[0].setDate(date.getDate()-date.getDay());
+    week[0] = new Date(workout.date);
+    week[0].setDate(workout.date.getDate()-workout.date.getDay());
     for (let i=1;i<=6;i++) {
-        week[i] = new Date(date);
-        week[i].setDate(date.getDate()-date.getDay() + i)
+        week[i] = new Date(workout.date);
+        week[i].setDate(workout.date.getDate()-workout.date.getDay() + i)
     }
     const daysInMonth1 = week.filter(day=>day.getMonth()===week[0].getMonth()).length
     const daysInMonth2 = 7 - daysInMonth1;
@@ -42,7 +43,7 @@ export default function DatePicker(props) {
         </div>);
     });
     
-    const splitWeek = !week.every(day=>day.getMonth()===date.getMonth());
+    const splitWeek = !week.every(day=>day.getMonth()===workout.date.getMonth());
 
     return (
         <div id="DatePicker">
@@ -68,9 +69,9 @@ export default function DatePicker(props) {
             
                     <div id="week">
                         {week.map(day => {
-                            const activeDay = day.getDay()===date.getDay() ? 'active-day' : '';
+                            const activeDay = day.getDay()===workout.date.getDay() ? 'active-day' : '';
                             return (
-                                <DaySquare key={day.getDay()} date={day} activeDay={activeDay} setDate={setDate}/>
+                                <DaySquare key={day.getDay()} date={day} activeDay={activeDay} setWorkout={setWorkout}/>
                             )
                         })}
                     </div>

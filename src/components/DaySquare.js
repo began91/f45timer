@@ -18,7 +18,7 @@ export default function DaySquare(props) {
     const noWorkout = workout ? '' : ' no-workout'
 
     return (
-        <div className={props.activeDay + ' daySquare'} onClick={()=>props.setDate(new Date(date))}>
+        <div className={props.activeDay + ' daySquare'} onClick={()=>props.setWorkout(getWorkoutByDate(new Date(date)))}>
             <div className="weekday">
                 {date.toLocaleString(undefined,{weekday: 'short'})}
             </div>

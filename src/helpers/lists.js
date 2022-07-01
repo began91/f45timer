@@ -42,7 +42,7 @@ function getWorkoutByDate(date) {
     const yearsMatch = (date1,date2) => date1.getFullYear()===date2.getFullYear();
     const areDatesEqual = (date1,date2) => datesMatch(date1,date2) && monthsMatch(date1,date2) && yearsMatch(date1,date2);
     
-    return workoutsByDate.find(workout=>areDatesEqual(workout.date,date));
+    return workoutsByDate.find(workout=>areDatesEqual(workout.date,date)) || {date};
 }
 
 export {
