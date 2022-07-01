@@ -22,12 +22,7 @@ export default function App(props) {
         (<SetupScreen setWorkoutStatus={setWorkoutStatus} useWorkout={useWorkout}
         setupView={setupView} onViewChange={setSetupView} />)}
       </div>
-      {/* <button id="toggleWorkout" onClick={this.toggleWorkout}></button> */}
-      {workoutStatus ? '1':'0'}
-    
-      {/* <div>
-        <MyTimer expiryTimestamp={this.state.time} />
-      </div>     */}
+
     </div>
   );
 }
