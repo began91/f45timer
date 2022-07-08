@@ -1,26 +1,56 @@
-import React ,{ useState }from 'react';
+import React ,{ useState, useEffect, useCallback }from 'react';
 import './WorkoutScreen.css';
 
 export default function WorkoutScreen (props) {
     const workout = props.workout;
-    console.log(workout)
-    const [totalT,setTotalT] = useState(0);
+    //state
+    const [mainTimer,setMainTimer] = useState(0);
     const [isActive, setIsActive] = useState(false);
     const [currentSet, setCurrentSet] = useState(0);
-    // const totalTime = setInterval(updateActiveTimers,1000);
+    const [setTimer,setSetTimer] = useState(0);
+    //derivatives of state
+    let currentStation = workout.stationList[workout.stationIndex[currentSet]];
+    let nextStation = workout.stationList[workout.stationIndex[currentSet+1]]
+    let currentSetDuration = workout.timeList[workout.timeIndex[currentSet]];
+    let isWork = workout.stationIndex[currentSet]<workout.stations;
+    let remainingTime = workout.setDurationList
+        .filter((_,i)=>i>=currentSet)
+        .reduce((prev,setDuration)=>{
+            return +prev+ +setDuration;
+        },[-setTimer])
 
-    function stopAllTimers() {
+    const stopAllTimers = useCallback(() => {
         // clearInterval(totalTime);
-    }
+    },[])
 
-    function updateActiveTimers() {
-        setTotalT(totalT+1)
-    }
-
-    const endWorkout = () => {
+    const endWorkout = useCallback(() => {
         stopAllTimers()
         props.setWorkoutStatus(false)
-    }
+    },[stopAllTimers, props])
+
+    const updateActiveTimers = useCallback(()=> {
+        if (setTimer>=currentSetDuration-1) {
+            if (currentSet===workout.numSets-1) {
+                endWorkout()
+            }
+            setCurrentSet(currentSet=>currentSet+1)
+            setSetTimer(-1)
+        }
+        setMainTimer(mainTimer=>mainTimer+1);
+        setSetTimer(setTimer=>setTimer+1);
+    },[currentSetDuration,setTimer, currentSet, endWorkout, workout]);
+
+    useEffect(()=> {
+        // https://www.geeksforgeeks.org/create-a-stop-watch-using-reactjs/
+        let interval = null;
+
+        if (isActive) {
+            interval = setInterval(updateActiveTimers,1000)
+        } else {
+            clearInterval(interval)
+        }
+        return ()=>clearInterval(interval)
+    }, [isActive,updateActiveTimers])
 
     const handlePlayPause = () => {
         setIsActive(!isActive)
@@ -47,25 +77,29 @@ export default function WorkoutScreen (props) {
             endWorkout()
         } else {
             setCurrentSet(currentSet + +e.target.value)
+            setSetTimer(0)
         }
     }
 
-    let currentStation = workout.stationList[workout.stationIndex[currentSet]];
-    let nextStation = workout.stationList[workout.stationIndex[currentSet+1]]
-    let currentTiming = workout.timeList[workout.timeIndex[currentSet]];
-    let isWork = workout.stationIndex[currentSet]<workout.stations;
+    let mainTimerString = mainTimer>=3600 ? 
+        new Date(mainTimer*1000).toISOString().substring(11,19) :
+        new Date(mainTimer*1000).toISOString().substring(14,19);
+
+    let remainingTimeString = remainingTime>=3600 ?
+        new Date(remainingTime*1000).toISOString().substring(11,19) :
+        new Date(remainingTime*1000).toISOString().substring(14,19);
 
     return (
         <div id='workout-screen' className={isWork ? 'work':'rest'}>
             Workout Screen
             <div id="logo-container">
                 <div id='elapsed-timer'>
-                    Elapsed: 0:00
+                    Elapsed: {mainTimerString}
                 </div>
                 <div id="remaining-timer">
-                    Remaining: 45:00
+                    Remaining: {remainingTimeString}
                 </div>
-                <img src={workout.logo} className='logo'/>
+                <img src={workout.logo} className='logo' alt='logo'/>
                 <div className="set-container">
                     <div className="set-counter">Set: {currentSet+1}/{workout.numSets}</div>
                     <div className="set-bars">
@@ -77,7 +111,7 @@ export default function WorkoutScreen (props) {
                 {isWork ? 'Work':'Rest'}
                 <div className="set-timer">
                     <div className="time-cirle"></div>
-                    <div className="set-time-remaining">{currentTiming}</div>
+                    <div className="set-time-remaining">{currentSetDuration-setTimer}</div>
                 </div>
                 <div className="workout-name">{currentStation}</div>
                 <div className="next-station">
@@ -92,7 +126,6 @@ export default function WorkoutScreen (props) {
                 <div className="fast-forward">5-&gt;</div>
                 <button className="next-set" onClick={incrementSet} value={1}>Next<br/>|&gt;<br/>Set</button>
             </div>
-
         </div>
     )
 }

@@ -37,6 +37,8 @@ export default function Piston(stationList=[]) {
         }
     }
 
+    let setDurationList = timeIndex.map(tI=>timeList[tI]);
+
     return {
         style,
         stations,
@@ -50,6 +52,7 @@ export default function Piston(stationList=[]) {
         stationIndex,
         timeList,
         timeIndex,
+        setDurationList,
         logo
     }
 }

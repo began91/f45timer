@@ -35,6 +35,8 @@ export default function Bears(stationList=[]) {
         }
     }
 
+    let setDurationList = timeIndex.map(tI=>timeList[tI]);
+
     return {
         style,
         stations,
@@ -48,6 +50,7 @@ export default function Bears(stationList=[]) {
         stationIndex,
         timeList,
         timeIndex,
+        setDurationList,
         logo
     }
 }

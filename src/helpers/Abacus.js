@@ -42,6 +42,8 @@ export default function Abacus(stationList=[]) {
         }
     }
 
+    let setDurationList = timeIndex.map(tI=>timeList[tI]);
+
     return {
         style,
         stations,
@@ -55,6 +57,7 @@ export default function Abacus(stationList=[]) {
         stationIndex,
         timeList,
         timeIndex,
+        setDurationList,
         logo
     }
 
