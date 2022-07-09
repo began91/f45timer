@@ -28,11 +28,11 @@ body > * {
   color: white;
 }
 
-* {
+/* * {
   outline: 1px;
   outline-color: red;
   outline-style: dashed;
-}
+} */
 
 .App-link {
   color: #61dafb;

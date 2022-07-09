@@ -1,5 +1,6 @@
 import React ,{ useState, useEffect, useCallback }from 'react';
 import './WorkoutScreen.css';
+import Beep from '../helpers/Beep.js';
 
 export default function WorkoutScreen (props) {
     const workout = props.workout;
@@ -19,11 +20,7 @@ export default function WorkoutScreen (props) {
         .reduce((prev,setDuration)=>{
             return +prev+ +setDuration;
         },[-setTimer])
-    console.log('Remaining Time:' + workout.setDurationList)
-    // const stopAllTimers = useCallback(() => {
-    //     // clearInterval(totalTime);
-    // },[])
-
+    
     const endWorkout = useCallback(() => {
         // stopAllTimers()
         // popup to display workout stats
@@ -38,6 +35,8 @@ export default function WorkoutScreen (props) {
             if (currentSet>=workout.numSets-1) {
                 endWorkout()
             }
+            props.snd.src = Beep;
+            props.snd.play();
             setCurrentSet(currentSet=>currentSet+1)
             setSetTimer(-1)
         }
@@ -51,7 +50,7 @@ export default function WorkoutScreen (props) {
 
         if (currentSet>=workout.numSets) {
             endWorkout();
-        }
+        } 
 
         if (isActive) {
             interval = setInterval(updateActiveTimers,1000)
@@ -106,6 +105,7 @@ export default function WorkoutScreen (props) {
                 endWorkout();
             }
             goToSet(currentSet+1)
+            
         } else if (newTime < 0) {
             setSetTimer(0)
         } else {
@@ -115,7 +115,6 @@ export default function WorkoutScreen (props) {
     }
 
     const timeString = (seconds) => {
-        console.log(seconds);
         return seconds>=3600 ? 
             new Date(seconds*1000).toISOString().substring(11,19) :
             new Date(seconds*1000).toISOString().substring(14,19);
@@ -141,7 +140,7 @@ export default function WorkoutScreen (props) {
                 </div>
                 <img src={workout.logo} className='logo' alt='logo'/>
                 <div className="set-container">
-                    <div className="set-counter">Set: {currentSet+1}/{workout.numSets}</div>
+                    <div className="set-counter">Set: {currentSet>=workout.numSets? workout.numSets : (currentSet+1)}/{workout.numSets}</div>
                     <div className="set-bars">
                         {setBars}
                     </div>

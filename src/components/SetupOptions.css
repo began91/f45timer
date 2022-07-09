@@ -1,4 +1,23 @@
+#setupOptions {
+    display: flex;
+    justify-content: space-around;
+}
+
+#setupOptions > button {
+    flex-grow:1;
+    margin-left: 4px;
+    margin-right: 4px;
+    border-bottom: 0px;
+    border-radius: 5px 5px 0 0;
+}
+
+.unselected {
+    background-color: rgba(1,1,1,.1);
+    border: none;
+}
+
 .selected {
-    background-color: rgb(179, 177, 177);
-    border: 2px inset;
+    background-color: rgb(36, 70, 221);
+    color: white;
+    border: 2px inset rgb(36, 72, 255);
 }

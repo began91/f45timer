@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useEffect, useCallback} from 'react';
+import './WorkoutInfo.css';
 // import {getWorkoutByDate} from '../helpers/lists.js';
 // import StationList from './StationList.js';
 
@@ -6,44 +7,63 @@ export default function WorkoutInfo(props) {
     const [workout,setWorkout] = props.useWorkout;
 
     const handleChange = (e) => {
+        e.target.style.height = 'inherit';
+        e.target.style.height = (+e.target.scrollHeight-5) + 'px';
         let i = e.target.id[7];
         let newStationList = workout.stationList;
         newStationList[i] = e.target.value;
         setWorkout({...workout, stationList: newStationList})
     }
 
+    useEffect(()=>{
+        //https://stackoverflow.com/questions/454202/creating-a-textarea-with-auto-resize
+        const tx = document.getElementsByTagName('textarea');
+        for (let i=0; i< tx.length; i++) {
+            tx[i].style.height = 'inherit';
+            tx[i].setAttribute('style','height:' + (tx[i].scrollHeight-5) + 'px;overflow-y:hidden;'); 
+        }
+    })
+
     return !workout.stationList ? (
                 <div className="noWorkoutInfo">No Workout For the Selected Date</div>
             ): 
             (<div id='workoutInfo'>
-                <div id="workoutStyle">
-                    Style: {workout.style}
+                <div className='workout-info-label'>Style: </div>
+                <div id="workoutStyle" className='workout-info-data'>{workout.style}</div>
+                <div className='workout-info-label'>Stations: </div>
+                <div id="workoutStations" className='workout-info-data'>
+                    {workout.stations}
                 </div>
-                <div id="workoutStations">
-                    Stations: {workout.stations}
+                <div className='workout-info-label'>Pods: </div>
+                <div id="workoutPods" className='workout-info-data'>
+                    {workout.pods}
                 </div>
-                <div id="workoutPods">
-                    Pods: {workout.pods}
+                <div className='workout-info-label'>Laps:</div>
+                <div id="workoutLaps" className='workout-info-data'>
+                    {workout.laps}
                 </div>
-                <div id="workoutLaps">
-                    Laps: {workout.laps}
+                <div className='workout-info-label'>Sets: </div>
+                <div id="workoutSets" className='workout-info-data'>
+                    {workout.sets}
                 </div>
-                <div id="workoutSets">
-                    Sets: {workout.sets}
+                <div className='workout-info-label'>Timing: </div>
+                <div id="workoutTiming" className='workout-info-data'>
+                    {workout.timing}
                 </div>
-                <div id="workoutTiming">
-                    Timing: {workout.timing}
+                <div className='workout-info-label'>Total Time: </div>
+                <div id="totalTime" className='workout-info-data'>
+                    {workout.durationDisplay}
                 </div>
-                <div id="workoutMisc">
-                    Misc: {workout.misc}
+                <div className='workout-info-label'>Misc: </div>
+                <div id="workoutMisc" className='workout-info-data'>
+                    {workout.misc}
                 </div>
-                <form id='stationList'>
+                <ol id='stationList'>
                     {workout.stationList.filter((_,i)=>i<workout.stations).map((station,i)=>(
-                        <div key={i}>
-                            <label htmlFor={'station'+i} className='station-label'>{(i+1)+'. '}</label>
-                            <input type='text' id={'station'+i} value={station} onChange={handleChange} className='station-input'/>
-                        </div>
+                        <li className='station-item' key={i}>
+                            <textarea type='text' rows='1' id={'station'+i} value={station} onChange={handleChange} className='station-input'></textarea>
+                        </li>
                     ))}
-                </form>
+                </ol>
             </div>)
 }

@@ -3,6 +3,7 @@ import CustomWorkoutSetup from './CustomWorkoutSetup.js';
 import WorkoutByDateSetup from './WorkoutByDateSetup.js';
 import SetupOptions from './SetupOptions';
 import './SetupScreen.css';
+import Beep from '../helpers/Beep.js';
 
 export default function SetupScreen(props) {
 
@@ -15,7 +16,11 @@ export default function SetupScreen(props) {
             : 
             (<WorkoutByDateSetup useWorkout={props.useWorkout}/>)
             }
-            <button id="startWorkout" onClick={()=>props.setWorkoutStatus(true)}>Start Workout</button>
+            <button id="startWorkout" onClick={()=>{
+                props.setWorkoutStatus(true);
+                props.snd.src = Beep;
+                props.snd.play();
+                }}>Start Workout</button>
         </div>        
     )
 }

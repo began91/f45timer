@@ -83,16 +83,6 @@ export default function DatePicker(props) {
                     Week 
                 </button>
             </div>
-                
-            {/* <br/>
-            {displayCalendar? 
-            (
-                <div className="calendar">
-                    <button id="closeCalendar" onClick={()=>setDisplayCalendar(false)}>Close Calendar</button>
-                </div>
-            ) : 
-            ('')}
-            <br/> */}
             <button onClick={setToday}>GoTo Today</button>
         </div>
     )

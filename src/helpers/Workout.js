@@ -44,23 +44,23 @@ export default function Workout(year,month,day,workoutStyle, stationList = []) {
             }
             break;
         case 'Afterglow':
-            stations = 18;
+            stations = 9; // actually 9 where you do two different workouts
             pods = 1;
-            laps = 1;
-            sets = 3;
-            timing = '60/30 60/30 30/20';
+            laps = 3;
+            sets = 1;
+            timing = '3 Laps: 60/30 60/30 30/20';
             timeList = [60,30,60,30,30,20];
-            misc = 'Cardio workout built with a ladder style combination sequence. Work as far down the ladder as you can. The combo stations will get your heart rate into the working zone and working up a sweat!';
+            misc = 'Combo stations. Left exercise 10-9-8-... with one of the right workout in between';
+            //Cardio workout built with a ladder style combination sequence. Work as far down the ladder as you can. The combo stations will get your heart rate into the working zone and working up a sweat!';
+            //9 stations, follow the leader. 3 laps: 60/30, 60/30, 30/20. There are two exercises at each station. You do 10 reps of the one on the right (even # above), 1 rep of the one on the left (odd # above). The 1 rep exercise is fixed. The other exercise you’ll work from 10-9-8… 1 rep.
             for (let i=0;i<numSets(sets,stations,laps);i++) {// from bears
+                let lap = Math.floor(i/(stations*2));
                 if (i%2===0) {//work sets
-                    stationIndex[i] = Math.floor(i/(sets*2)) % stations; //added stations modulo due to multiple laps and changed to six
-                    timeIndex[i] = i%(sets*2); //changed to 6 for same as below
-                } else if (i%(sets*2)===1 || i%(sets*2)===3) {//rest 1 //changed modulo to 6 for 6 times (2* 3 sets)
-                    stationIndex[i] = stations; //stay here
-                    timeIndex[i] = 1;
-                } else {//rest 2
-                    stationIndex[i] = stations+1; //next station
-                    timeIndex[i] = sets*2-1;
+                    stationIndex[i] = Math.floor(i/2) % stations;
+                    timeIndex[i] = 2*lap; 
+                } else {//all rests are next station
+                    stationIndex[i] = stations + 1; //next station
+                    timeIndex[i] = 2*lap+1
                 }
             }
             break;
@@ -155,7 +155,18 @@ export default function Workout(year,month,day,workoutStyle, stationList = []) {
             }
             break;
         case 'Tempest':
-            misc = 'Cardio based workout featuring Concept 2 equipment: Bike, Row, and Ski Erg. Work as a team to complete the targets on the screens.';
+            stations = 4 + 7;
+            pods = 4;
+            laps = 1;
+            sets = 1;
+            timing = '7 min AMRAP at each 4 station pod. Seven 30 sec reels between pods';
+            timeList = [7*60,30,60];
+            misc = 'Each pod rotates when ski/bike/row/bench hops station hits target (beginner/advanced). As many reps as possible.';
+            timeIndex = [0,1,1,1,1,1,1,1,2,0,1,1,1,1,1,1,1,2,0,1,1,1,1,1,1,1,2,0,1,1,1,1,1,1,1];
+            stationIndex = [0,4,5,6,7,8,9,10,12,
+                1,4,5,6,7,8,9,10,12,
+                2,4,5,6,7,8,9,10,12,
+                3,4,5,6,7,8,9,10];
             break;
         case 'Templars':
             stations = 14;
@@ -179,16 +190,16 @@ export default function Workout(year,month,day,workoutStyle, stationList = []) {
 
     }
 
-    if (stationList.length === 0) {
-        for (let i=0;i<stations;i++) {
-            stationList.push('W'+(i+1))
-        }
+    for (let i=stationList.length;i<stations;i++) {
+        stationList.push('W'+(i+1));
     }
     
     stationList.push('Rest-Stay Here');
     stationList.push('Rest-Next Station');
     // stationList.push('Rest-Next Pod'); //Not sure if needed yet. will need to adjust some logic elsewhere that assumes only two things have been added to the workout list.
     let setDurationList = timeIndex.map(tI=>timeList[tI]);
+    let duration = setDurationList.reduce((a,b)=>+a+ +b,[0]);
+    let durationDisplay = duration>3600 ? new Date(duration*1000).toISOString().substring(11,19) : new Date(duration*1000).toISOString().substring(14,19);
 
     return {
         date: new Date(year,month-1,day),
@@ -200,12 +211,13 @@ export default function Workout(year,month,day,workoutStyle, stationList = []) {
         sets,
         timing,
         misc,
-        numSets: numSets(sets,stations,laps),
+        numSets: stationIndex.length,
         stationList,
         stationIndex,
         timeList,
         timeIndex,
         setDurationList,
+        durationDisplay,
         logo,
         setStationList: function setStationList(stationList) {this.stationList = stationList}
     }
