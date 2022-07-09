@@ -7,7 +7,7 @@ export default function CustomWorkoutSetup(props) {
         <div id="customWorkoutSetup">
             Custom Workout Setup
             {workoutStyleList.map(workoutStyle => {
-                return (<Workout workout={workoutStyle} key={workoutStyle.style}/>)
+                return (<Workout workout={workoutStyle} key={workoutStyle}/>)
             })}
         </div>        
     )
