@@ -19,7 +19,7 @@ export default function WorkoutScreen (props) {
         .reduce((prev,setDuration)=>{
             return +prev+ +setDuration;
         },[-setTimer])
-
+    console.log('Remaining Time:' + workout.setDurationList)
     // const stopAllTimers = useCallback(() => {
     //     // clearInterval(totalTime);
     // },[])
@@ -31,7 +31,7 @@ export default function WorkoutScreen (props) {
         setIsActive(false);
         // display options "reset workout" or "end workout"
         // props.setWorkoutStatus(false) //if they choose to end workout then execute this
-    },[setIsComplete, setIsActive, setSetTimer,currentSetDuration])
+    },[setIsComplete, setIsActive])
 
     const updateActiveTimers = useCallback(()=> {
         if (setTimer>=currentSetDuration-1) {
@@ -115,6 +115,7 @@ export default function WorkoutScreen (props) {
     }
 
     const timeString = (seconds) => {
+        console.log(seconds);
         return seconds>=3600 ? 
             new Date(seconds*1000).toISOString().substring(11,19) :
             new Date(seconds*1000).toISOString().substring(14,19);
