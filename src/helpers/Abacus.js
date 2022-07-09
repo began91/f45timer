@@ -1,7 +1,7 @@
 import logo from '../F45_logos/abacus.png';
 
 export default function Abacus(stationList=[]) {
-    const style = 'Abacus';
+    // const style = 'Abacus';
     const stations = 6;
     const pods = 1;
     const laps = 2;
@@ -15,12 +15,12 @@ export default function Abacus(stationList=[]) {
         }
     }
     
-    stationList.push('Rest-Stay Here')
-    stationList.push('Rest-Next Station')
+    // stationList.push('Rest-Stay Here')
+    // stationList.push('Rest-Next Station')
 
     const timeList = [20,10,22,10,24,10,26,10,28,10];
 
-    const numSets = sets*stations*laps*2-1
+    const numSets = sets*stations*laps*2-1 //*2 assumes every staion has a rest after it. -1 removes last rest station
 
     let stationIndex = [];
     let timeIndex = [];
@@ -42,10 +42,10 @@ export default function Abacus(stationList=[]) {
         }
     }
 
-    let setDurationList = timeIndex.map(tI=>timeList[tI]);
+    // let setDurationList = timeIndex.map(tI=>timeList[tI]);
 
     return {
-        style,
+        // style,
         stations,
         pods,
         laps,
@@ -57,7 +57,7 @@ export default function Abacus(stationList=[]) {
         stationIndex,
         timeList,
         timeIndex,
-        setDurationList,
+        // setDurationList,
         logo
     }
 

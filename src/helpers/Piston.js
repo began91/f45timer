@@ -1,7 +1,7 @@
 import logo from '../F45_logos/piston.png';
 
 export default function Piston(stationList=[]) {
-    const style = 'Piston';
+    // const style = 'Piston';
     const stations = 12;
     const pods = 1;
     const laps = 3;
@@ -19,8 +19,8 @@ export default function Piston(stationList=[]) {
     }
 
     
-    stationList.push('Rest-Stay Here')
-    stationList.push('Rest-Next Station')
+    // stationList.push('Rest-Stay Here')
+    // stationList.push('Rest-Next Station')
 
     const timeList = [40,20];
 
@@ -37,10 +37,10 @@ export default function Piston(stationList=[]) {
         }
     }
 
-    let setDurationList = timeIndex.map(tI=>timeList[tI]);
+    // let setDurationList = timeIndex.map(tI=>timeList[tI]);
 
     return {
-        style,
+        // style,
         stations,
         pods,
         laps,
@@ -52,7 +52,7 @@ export default function Piston(stationList=[]) {
         stationIndex,
         timeList,
         timeIndex,
-        setDurationList,
+        // setDurationList,
         logo
     }
 }

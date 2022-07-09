@@ -20,6 +20,14 @@ class Workout {
         Object.entries(data).forEach(entry=>{
             this[entry[0]]=entry[1];
         })
+        
+        //add data thats the same for all workouts and derivative calculations
+        this.style=workoutStyle;
+        
+        this.stationList.push('Rest-Stay Here');
+        this.stationList.push('Rest-Next Station');
+        this.setDurationList = this.timeIndex.map(tI=>this.timeList[tI]);
+
     }
 
     setStationList(stationList) {

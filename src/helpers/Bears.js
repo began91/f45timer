@@ -1,7 +1,7 @@
 import logo from '../F45_logos/bears.png';
 
 export default function Bears(stationList=[]) {
-    const style = 'Bears';
+    // const style = 'Bears';
     const stations = 18;
     const pods = 1;
     const laps = 1;
@@ -13,8 +13,8 @@ export default function Bears(stationList=[]) {
         stationList.push('W'+(i+1));
     }
     
-    stationList.push('Rest-Stay Here')
-    stationList.push('Rest-Next Station')
+    // stationList.push('Rest-Stay Here')
+    // stationList.push('Rest-Next Station')
 
     const timeList = [35,10,55,20];
 
@@ -35,10 +35,10 @@ export default function Bears(stationList=[]) {
         }
     }
 
-    let setDurationList = timeIndex.map(tI=>timeList[tI]);
+    // let setDurationList = timeIndex.map(tI=>timeList[tI]);
 
     return {
-        style,
+        // style,
         stations,
         pods,
         laps,
@@ -50,7 +50,7 @@ export default function Bears(stationList=[]) {
         stationIndex,
         timeList,
         timeIndex,
-        setDurationList,
+        // setDurationList,
         logo
     }
 }
