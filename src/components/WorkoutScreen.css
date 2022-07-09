@@ -48,6 +48,7 @@ img.logo {
     display:flex;
     justify-content: space-around;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .set-bar-true {
