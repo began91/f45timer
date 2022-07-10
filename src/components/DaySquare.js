@@ -13,7 +13,7 @@ export default function DaySquare(props) {
 
     const workout = getWorkoutByDate(date);
  
-    const logo = workout ? workout.logo : defaultLogo;
+    const logo = workout.logo ? workout.logo : defaultLogo;
 
     const noWorkout = workout ? '' : ' no-workout'
 

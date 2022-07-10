@@ -83,7 +83,7 @@ export default function DatePicker(props) {
                     Week 
                 </button>
             </div>
-            <button onClick={setToday}>GoTo Today</button>
+            <button id="goToToday" onClick={setToday}>Go To Today</button>
         </div>
     )
                         

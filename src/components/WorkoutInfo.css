@@ -3,6 +3,7 @@
     grid-template-columns: 1.25fr 4fr;
     align-items: center;
     margin-top: 5px;
+    background-color: rgba(0,0,0,0.1);
 }
 
 .workout-info-label, .workout-info-data {

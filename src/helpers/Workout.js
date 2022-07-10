@@ -50,7 +50,7 @@ export default function Workout(year,month,day,workoutStyle, stationList = []) {
             sets = 1;
             timing = '3 Laps: 60/30 60/30 30/20';
             timeList = [60,30,60,30,30,20];
-            misc = 'Combo stations. Left exercise 10-9-8-... with one of the right workout in between';
+            misc = 'Combo stations. Left exercise reps: 10-9-8-... with one rep of the right workout in between';
             //Cardio workout built with a ladder style combination sequence. Work as far down the ladder as you can. The combo stations will get your heart rate into the working zone and working up a sweat!';
             //9 stations, follow the leader. 3 laps: 60/30, 60/30, 30/20. There are two exercises at each station. You do 10 reps of the one on the right (even # above), 1 rep of the one on the left (odd # above). The 1 rep exercise is fixed. The other exercise you’ll work from 10-9-8… 1 rep.
             for (let i=0;i<numSets(sets,stations,laps);i++) {// from bears
@@ -182,6 +182,25 @@ export default function Workout(year,month,day,workoutStyle, stationList = []) {
                     stationIndex[i] = Math.floor(i/2) % stations; //changed this to 14 instead of 12
                 } else {
                     stationIndex[i] = stations+1;
+                }
+            }
+            break;
+        case 'Trackstars':
+            stations = 18;
+            pods = 1;
+            laps = 1;
+            sets = 2;
+            timing = '90/10 60/10';
+            misc = '"You go, I go" format with partner at each station.';
+            timeList = [90,10,60,10];
+            for (let i=0; i< numSets(sets,stations,laps);i++) {
+                timeIndex[i] = i%4; //time cycles through all four continuously
+                if (i%2===0) {
+                    //work sets
+                    stationIndex[i] = Math.floor(i/4) % stations;
+                } else {
+                    //rest sets
+                    stationIndex[i] = stations + ((i%4) - 1)/2;
                 }
             }
             break;

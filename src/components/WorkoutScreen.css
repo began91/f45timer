@@ -256,3 +256,7 @@ svg {
     top: 0;
     left: 0;
 }
+
+.workout-stats {
+    margin-top: 50px;
+}

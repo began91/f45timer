@@ -1,6 +1,11 @@
 .App {
   text-align: center;
   box-sizing: border-box;
+  height: 100%;
+}
+
+html,body,#root, .App, #mainScreen {
+  height: 100%;
 }
 
 body > * {
