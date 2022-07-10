@@ -9,7 +9,7 @@ export default function WorkoutInfo(props) {
     const handleChange = (e) => {
         e.target.style.height = 'inherit';
         e.target.style.height = (+e.target.scrollHeight-5) + 'px';
-        let i = e.target.id[7];
+        let i = e.target.id.split('_').pop();
         let newStationList = workout.stationList;
         newStationList[i] = e.target.value;
         setWorkout({...workout, stationList: newStationList})
@@ -18,6 +18,7 @@ export default function WorkoutInfo(props) {
     useEffect(()=>{
         //https://stackoverflow.com/questions/454202/creating-a-textarea-with-auto-resize
         const tx = document.getElementsByTagName('textarea');
+        console.log(10);
         for (let i=0; i< tx.length; i++) {
             tx[i].style.height = 'inherit';
             tx[i].setAttribute('style','height:' + (tx[i].scrollHeight-5) + 'px;overflow-y:hidden;'); 
@@ -61,7 +62,7 @@ export default function WorkoutInfo(props) {
                 <ol id='stationList'>
                     {workout.stationList.filter((_,i)=>i<workout.stations).map((station,i)=>(
                         <li className='station-item' key={i}>
-                            <textarea type='text' rows='1' id={'station'+i} value={station} onChange={handleChange} className='station-input'></textarea>
+                            <textarea type='text' rows='1' id={'station_'+i} value={station} onChange={handleChange} className='station-input'></textarea>
                         </li>
                     ))}
                 </ol>

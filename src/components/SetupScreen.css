@@ -7,6 +7,8 @@
 
 #setupScreen {
     height: 100%;
+    max-width: 800px;
+    margin: auto;
 }
 
 #workoutByDateSetup, #customWorkoutSetup {
@@ -15,4 +17,6 @@
     z-index: 0;
     border-radius: 20px;
     min-height: 97%;
+    max-width: 800px;
+    margin: auto;
 }
