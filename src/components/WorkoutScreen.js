@@ -10,6 +10,7 @@ export default function WorkoutScreen (props) {
     const [currentSet, setCurrentSet] = useState(0);
     const [setTimer,setSetTimer] = useState(0);
     const [isComplete,setIsComplete] = useState(false);
+    const [pendingClose, setPendingClose] = useState(false);
     //derivatives of state
     let currentStation = workout.stationList[workout.stationIndex[currentSet]];
     let nextStation = workout.stationList[workout.stationIndex[currentSet+1]]
@@ -20,6 +21,7 @@ export default function WorkoutScreen (props) {
         .reduce((prev,setDuration)=>{
             return +prev+ +setDuration;
         },[-setTimer])
+    let percentComplete = setTimer/currentSetDuration*100;
     
     const endWorkout = useCallback(() => {
         // stopAllTimers()
@@ -74,8 +76,25 @@ export default function WorkoutScreen (props) {
         let isComplete = i<=currentSet;
         setBars[i] = (
             <div className={'set-bar-'+ isComplete} key={i} onClick={()=>goToSet(i-1)}>I</div>
-        )
+            )
     }
+
+    let setBars2 = workout.stationIndex.map((sI,i)=>{
+        let isCurrentSet = i===currentSet;
+        let style = {flexGrow: workout.setDurationList[i]};
+        
+        if (isCurrentSet) {
+            style.background = `linear-gradient(to right , green 0% ${percentComplete}%, white ${percentComplete}%)`;
+        }
+        
+        let isComplete = i<currentSet;
+        return sI<workout.stations ? 
+        (
+            <div className={`set-bar2-${isComplete} current-${isCurrentSet}`} key={i} onClick={()=>goToSet(i)} style={style}></div>
+        ) : '';
+    }).filter(result=>result!=='');
+    
+    const displayCurrentSet = workout.stationIndex.filter((sI,i)=>i<currentSet).filter(sI=>sI<workout.stations).length;
 
     const incrementSet = (e) => {
         // if its the first (0) set and value =-1 => do nothing
@@ -120,18 +139,25 @@ export default function WorkoutScreen (props) {
             new Date(seconds*1000).toISOString().substring(14,19);
     }
 
+    const timeStringSec = seconds => {
+        return seconds>=60 ? 
+            new Date(seconds*1000).toISOString().substring(14,19) :
+            new Date(seconds*1000).toISOString().substring(17,19);
+    }
+
     const resetWorkout = (e) => {
         setIsComplete(false);
         setMainTimer(0);
         setIsActive(true);
         setCurrentSet(0);
         setSetTimer(0);
+        setPendingClose(false);
     }
+
 
     return (
         <div id='workout-screen' className={isWork ? 'work':'rest'}>
-            Workout Screen
-            <div id="logo-container">
+            <div id="logo-container" className={isWork ? 'work' : 'rest'}>
                 <div id='elapsed-timer'>
                     Elapsed: {timeString(mainTimer)}
                 </div>
@@ -139,13 +165,14 @@ export default function WorkoutScreen (props) {
                     Remaining: {timeString(isComplete? 0 : remainingTime)}
                 </div>
                 <img src={workout.logo} className='logo' alt='logo'/>
-                <div className="set-container">
-                    <div className="set-counter">Set: {currentSet>=workout.numSets? workout.numSets : (currentSet+1)}/{workout.numSets}</div>
+                <div className='set-container'>
+                    <div className="set-counter">Set: {displayCurrentSet>=setBars2.length? setBars2.length : (displayCurrentSet+1)}/{setBars2.length}</div>
                     <div className="set-bars">
-                        {setBars}
+                        {setBars2}
                     </div>
                 </div>
             </div>
+
             {isComplete? (
                 <div className="workout-stats">
                     Workout Complete!<br/>
@@ -156,24 +183,53 @@ export default function WorkoutScreen (props) {
             ): (
                 <>
                     <div className='current-set'>
-                        {isWork ? 'Work':'Rest'}
+                        {/* https://www.youtube.com/watch?v=mSfsGTIQlxg */}
                         <div className="set-timer">
-                            <div className="time-cirle"></div>
-                            <div className="set-time-remaining">{currentSetDuration-setTimer}</div>
+                            <div className="time-circle-outer">
+                                <div className="time-circle-inner" style={{backgroundColor: isWork ? 'green':'red'}}>
+                                    <div className="set-time-remaining">
+                                        {timeStringSec(currentSetDuration-setTimer)}</div>
+                                </div>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="120px" height="120px" style={{strokeDashoffset: percentComplete*440/100}}>
+                                <defs>
+                                    <linearGradient id="GradientColor">
+                                        <stop offset="0%" stop-color="aqua" />
+                                        <stop offset="100%" stop-color="orange" />
+                                    </linearGradient>
+                                </defs>
+                                <circle cx="60" cy="60" r="50" stroke-linecap="round" />
+                            </svg>
                         </div>
+
                         <div className="workout-name">{currentStation}</div>
-                        <div className="next-station">
-                            {isWork?'':'Next: '+nextStation}
+                        {isWork?'':(
+                            <div className="next-station">
+                                {'Next: '+nextStation}
+                            </div>
+                        )}
+                        <div className="time-controls">
+                            <button className="last-set" onClick={incrementSet} value={-1}>Last<br/>&#x23EE;<br/>Set</button>
+                            <button className="rewind" onClick={incrementTime} value={-1}>&#x23EA;&#xFE0E; 5s</button>
+                            <div className="play-pause" onClick={handlePlayPause}>{isActive? (<>&#x23F8;</>):(<>&#x23F5;</>)}</div>
+                            <button className="fast-forward" onClick={incrementTime} value={1}>5s &#x23E9;&#xFE0E;</button>
+                            <button className="next-set" onClick={incrementSet} value={1}>Next<br/>&#x23ED;<br/>Set</button>
                         </div>
-                        <button onClick={endWorkout} id='stop-workout'>Stop Workout</button>
                     </div>
-                    <div className="time-controls">
-                        <button className="last-set" onClick={incrementSet} value={-1}>Last<br/>&lt;|<br/>Set</button>
-                        <button className="rewind" onClick={incrementTime} value={-1}>&lt;-5</button>
-                        <div className="play-pause" onClick={handlePlayPause}>{isActive?'Pause':'Play'}</div>
-                        <button className="fast-forward" onClick={incrementTime} value={1}>5-&gt;</button>
-                        <button className="next-set" onClick={incrementSet} value={1}>Next<br/>|&gt;<br/>Set</button>
+                    
+                    <div className={`exit-container closing-${pendingClose}`}>
+                        {pendingClose ? (
+                            <>
+                                End Workout?
+                                <div onClick={()=>setPendingClose(false)} id='resume-workout'>Resume</div>
+                                <div onClick={endWorkout} id='stop-workout'>End</div>
+                            </>
+                        ) : (
+                            <div onClick={()=>setPendingClose(true)} id='end-workout'>&#x2715;</div>
+                        )}
                     </div>
+
+
                 </>
             )}
         </div>

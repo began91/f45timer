@@ -8,42 +8,79 @@
     background-color: red;
 }
 
+#workout-screen {
+    display:flex;
+    flex-direction:column;
+    justify-content: flex-start;
+}
+
 #elapsed-timer {
     position: absolute;
-    top: 10px;
-    left: 3px;
+    background: linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.6));
+    box-shadow: 2px 2px 2px black, 0 0 2px rgba(255,255,255,0.7); 
+    border-radius: 10px;
+    font-size: 20px;
+    top: 40px;
+    left: 30px;
     padding: 3px;
+    z-index: 1;
 }
 
 #remaining-timer {
     position: absolute;
-    top: 10px;
-    right: 3px;
+    background: linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.6));
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.7), 0 0 2px rgba(255,255,255,0.7); 
+    border-radius: 10px;
+    font-size: 20px;
+    top: 40px;
+    right: 30px;
     padding: 3px;
+    z-index: 1;
 }
 
 #logo-container {
     position: relative;
-    text-align: center;
-    background-color: purple;
-    max-height: 50%;
-    overflow: hidden;
+    /* text-align: center; */
+    /* background-color: gray; */
+    height: 40%;
+    flex-grow:0;
+}
+
+#logo-container.work {
+    background: linear-gradient(white, green);
+}
+
+#logo-container.rest {
+    background: linear-gradient(white, red);
 }
 
 img.logo {
-    width: 100%;
+    margin-top: 20px;
+    max-width: 100%;
+    height: 100%;
+    position: absolute;
     z-index: 0;
-    bottom: 0px;
+    left: 50%;
+    top: 0px;
+    transform: translateX(-50%);
+    object-fit: scale-down;
+    overflow: hidden;
+    border-radius: 5%;
+    opacity: 0.9;
+    box-shadow: 2px 2px 5px 2px rgba(0,0,0,0.2);
 }
 
 .set-container {
     position: absolute;
-    bottom: 10px;
+    bottom: 0px;
     left: 50%;
     transform: translate(-50%,0);
     width: 80%;
     color: white;
     background-color: blue;
+    opacity: 0.9;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px 2px rgba(0,0,0,0.2);
     padding: 3px;
 }
 
@@ -52,17 +89,54 @@ img.logo {
     flex-wrap: wrap;
     justify-content: space-around;
     font-weight: bold;
+    /* gap: 2px; */
+    padding: 2px;
+}
+
+.set-bar-true, .set-bar2-true {
     cursor: pointer;
+    background-color: green;
+    min-width: 2px;
+    border: 1px solid blue;
+    height: 12px;
+    /* flex-grow: 1; */
 }
 
-.set-bar-true {
-    color: green;
-    flex-grow: 1;
+.set-bar-false, .set-bar2-false {
+    cursor: pointer;
+    background-color: white;
+    min-width: 2px;
+    border: 1px solid blue;
+    height: 12px;
 }
 
-.set-bar-false {
-    color: white;
+.current-set{ 
+    flex-grow: 2;
+    display:flex;
+    height: 100%;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 5px;
+    padding-bottom: 80px;
+}
+
+.set-time-remaining {
+    font-size: 30px;
+}
+
+.workout-name {
+    font-size: 30px;
+}
+
+.next-station {
     flex-grow: 1;
+    font-size: 25px;
+    background-color: rgba(255,255,255,0.4);
+    max-width: 90%;
+    border-radius: 20px;
+    padding: 5px;
 }
 
 .time-controls {
@@ -72,4 +146,110 @@ img.logo {
     position: absolute;
     width: 100%;
     bottom: 20px;
+}
+
+.play-pause {
+    font-size: 40px;
+    background-color: rgba(255,255,255,0.5);
+    border: 1px outset rgba(255,255,255,0.5);
+    border-radius: 50%;
+    padding: 10px;
+    padding-top: 0px;
+}
+
+.exit-container {
+    padding: 5px;
+    position: absolute;
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 26px;
+    top: 10px;
+    right: 10px;
+    transition: background-color .5s, color .5s, width .5s;
+    transition-timing-function: ease-in-out;
+    border-radius: 20px;
+}
+
+.exit-container.closing-true {
+    width: 90%;
+    background-color: rgba(0,0,0,.9);
+    color: white;
+}
+
+.exit-container.closing-false {
+    width: 20px;
+    height: 20px;
+    background-color: rgba(255,255,255,0.5);
+    color: black;
+    border: 1px solid rgba(0,0,0,0.2);
+}
+
+#end-workout {
+    margin-bottom: 1px;
+}
+
+#resume-workout {
+    background-color: green;
+    height: 20px;
+    color: white;
+    padding: 0 4px 0 4px;
+    margin: 4px;
+    border: 2px outset darkgreen;
+    border-radius: 5px;
+}
+
+#stop-workout {
+    background-color: red;
+    height: 20px;
+    color: white;
+    margin: 4px;
+    padding: 0 4px 0 4px;
+    border: 2px outset darkred;
+    border-radius: 5px;
+}
+
+.set-timer {
+    height: 120px;
+    width: 120px;
+    position: relative;
+}
+
+.time-circle-outer {
+    height: 119px;
+    width: 119px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 6px 6px 10px -1px rgba(0,0,0,0.15),
+                -6px -6px 10px -1px rgba(255,255,255,0.2);
+    background-color: rgba(121, 119, 224, 0.7);
+}
+
+.time-circle-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 81px;
+    width: 81px;
+    border-radius: 50%;
+    box-shadow: inset 4px 4px 6px 1px rgba(0,0,0,0.2),
+                inset -4px -4px 6px -1px rgba(255,255,255,0.4),
+                0.5px 0.5px 0.1px rgba(0,0,0,0.15),
+                0 12px 10px -10px rgba(0,0,0,0.05);
+}
+
+circle {
+    fill: none;
+    stroke: url(#GradientColor);
+    stroke-width: 20;
+    stroke-dasharray: 440;
+    transition: stroke-dashoffset .4s;
+}
+
+svg {
+    position: absolute;
+    top: 0;
+    left: 0;
 }
