@@ -18,9 +18,8 @@ export default function WorkoutInfo(props) {
     useEffect(()=>{
         //https://stackoverflow.com/questions/454202/creating-a-textarea-with-auto-resize
         const tx = document.getElementsByTagName('textarea');
-        console.log(10);
         for (let i=0; i< tx.length; i++) {
-            tx[i].style.height = 'inherit';
+            tx[i].style.height = '0px';
             tx[i].setAttribute('style','height:' + (tx[i].scrollHeight-5) + 'px;overflow-y:hidden;'); 
         }
     })
