@@ -74,7 +74,7 @@ img.logo {
     position: absolute;
     bottom: 0px;
     left: 50%;
-    transform: translate(-50%,0);
+    transform: translate(-50%,100%);
     width: 80%;
     color: white;
     background-color: blue;
@@ -128,6 +128,7 @@ img.logo {
 
 .workout-name {
     font-size: 30px;
+    max-width: 600px;
 }
 
 .next-station {
@@ -135,8 +136,10 @@ img.logo {
     font-size: 25px;
     background-color: rgba(255,255,255,0.4);
     max-width: 90%;
+    max-width: 400px;
     border-radius: 20px;
     padding: 5px;
+    margin: 5px;
 }
 
 .time-controls {
