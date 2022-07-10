@@ -1,4 +1,4 @@
-import React, {useEffect, useCallback} from 'react';
+import React, {useEffect} from 'react';
 import './WorkoutInfo.css';
 // import {getWorkoutByDate} from '../helpers/lists.js';
 // import StationList from './StationList.js';

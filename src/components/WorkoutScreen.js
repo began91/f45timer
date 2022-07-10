@@ -44,7 +44,7 @@ export default function WorkoutScreen (props) {
         }
         setMainTimer(mainTimer=>mainTimer+1);
         setSetTimer(setTimer=>setTimer+1);
-    },[currentSetDuration,setTimer, currentSet, endWorkout, workout]);
+    },[currentSetDuration,setTimer, currentSet, endWorkout, workout, props.snd]);
 
     useEffect(()=> {
         // https://www.geeksforgeeks.org/create-a-stop-watch-using-reactjs/

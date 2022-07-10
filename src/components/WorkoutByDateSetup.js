@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import DatePicker from './DatePicker';
 import WorkoutInfo from './WorkoutInfo';
-import {getWorkoutByDate} from '../helpers/lists.js';
+// import {getWorkoutByDate} from '../helpers/lists.js';
 
 export default function WorkoutByDateSetup(props) {
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './DatePicker.css';
 import DaySquare from './DaySquare';
 import {getWorkoutByDate} from '../helpers/lists.js';

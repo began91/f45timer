@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import CustomWorkoutSetup from './CustomWorkoutSetup.js';
 import WorkoutByDateSetup from './WorkoutByDateSetup.js';
 import SetupOptions from './SetupOptions';
