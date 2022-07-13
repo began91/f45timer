@@ -6,9 +6,12 @@ export default function CustomWorkoutSetup(props) {
     return (
         <div id="customWorkoutSetup">
             Custom Workout Setup
-            {workoutStyleList.map(workoutStyle => {
-                return (<Workout workout={workoutStyle} key={workoutStyle}/>)
-            })}
+            <label htmlFor='workoutStyle'>Workout Style:</label>
+            <select name='workoutStyle' id='workoutStyle'>
+                {workoutStyleList.map(workoutStyle => {
+                    return (<option value={workoutStyle} key={workoutStyle}>{workoutStyle}</option>)
+                })}    
+            </select>    
         </div>        
     )
 }
