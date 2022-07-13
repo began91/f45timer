@@ -1,41 +1,10 @@
-import Workout from './Workout.js';
-// import Bears from './Bears';
-// import Abacus from './Abacus';
-// import Piston from './Piston';
+import Workout from './CreateWorkout.js';
 
-const workoutStyleList = [// need to populate this list
-    'Abacus',
-    'Bears',
-    'Piston'
-];
-
-// class Workout {
-//     constructor(year,month,day,workoutStyle, stationList=[]) {
-//         //Date uses 0 indexed month
-//         this.date = new Date(year,month-1,day);
-//         //Get workout Style creator from list
-//         this.workoutStyle = workoutStyleList[workoutStyle];
-//         //Generate workout data from style creator function
-//         const data = this.workoutStyle(stationList);
-//         //Distribute workout data to top level properties
-//         Object.entries(data).forEach(entry=>{
-//             this[entry[0]]=entry[1];
-//         })
-        
-//         //add data thats the same for all workouts and derivative calculations
-//         this.style=workoutStyle;
-        
-//         this.stationList.push('Rest-Stay Here');
-//         this.stationList.push('Rest-Next Station');
-//         this.setDurationList = this.timeIndex.map(tI=>this.timeList[tI]);
-
-//     }
-
-//     setStationList(stationList) {
-//         //No need to rerun workout generation function due to station Index reference
-//         this.stationList = stationList;
-//     }
-// }
+// const workoutStyleList = [// need to populate this list
+//     'Abacus',
+//     'Bears',
+//     'Piston'
+// ];
 
 let workoutsByDate = [
     Workout(2022,7,3,'Bears'),
@@ -51,7 +20,7 @@ let workoutsByDate = [
     Workout(2022,7,9,'Trackstars',['barbell front squat','burpee','high knees on the spot','speed squats','rower sprints','dumbbell alternate snatch','pushup','bike sprints standing','plyometric lunge','sit up','russian twist','softbox jump alternating','dumbbell renegade row','deadball over head slams','kettlebell swing','fast feet sprawl','revo single push press alternate partner at extension','dumbbell curl + press alternating']),
     Workout(2022,7,10,'Pegasus',['kettlebell romanian deadlift','dumbbell alternate arm shoulder press','suspension trainer automic crunch','deadball bear hug squat','barbell lying tricep extension pause','ybell double hammer curl + alternate reverse lunge center grip','revo sit ups raise','plate box overhead step up','dumbbell floor press pulse','revo zercher curtsey squat','slides arm circle','power band low rear delt fly','push up','butterfly sit ups','alternate forward lunge']),
     Workout(2022,7,11,'Templars',['sandbag double clean fast feet sprawl','bear crawls back and forward short partnered','suspension trainer alternate arm row','kettlebell goblet squat partnered','balance trainer burpee + shoulder press partnered','box prisoner squat jump','burpee hands off partnered','dumbbell alternate lunge and over head press partnered','forward run + 2 x push up + backwards run partnered','seal jacks','bench hop partnered','plate low to high woodchop','step trainer low squat jumps partnered','bike hover partnered']),
-    Workout(2022,7,12,'Piston',['dumbbell romanian deadlift tempo 4-0-1','push up tempo','sandbag box shouldered reverse lunge to step up','dumbbell reverse fly','barbell over head hold reverse lunge','medicine ball jacknife','dumbbell incline bench press neutral grip pause','step trainer single leg hip thruster pause','kettlebell alternate floor row pause neutral grip','deadball frog squat','barbell bicep pulses','plank diagonal reach']),
+    Workout(2022,7,12,'Piston',['dumbbell romanian deadlift tempo 4-0-1','push up tempo','sandbag box shouldered reverse lunge to step up','dumbbell reverse fly','barbell over head hold reverse lunge','medicine ball jackknife','dumbbell incline bench press neutral grip pause','step trainer single leg hip thruster pause','kettlebell alternate floor row pause neutral grip','deadball frog squat','barbell bicep pulses','plank diagonal reach']),
     Workout(2022,7,13,'Tripledouble',['battle ropes crossovers','5 x double foot mountain climbers + 2 x lateral shoot throughs','cone lateral step 6 x 6 fast feet','shuttle sprint + 3 x squat jumps','5 x deadball slam + 2 x burpee','medicine ball russian twist with one arm push up','box jumps jumping over','10 x frog squats + 2 x sprawls','kettlebell single arm swing into high pulls']),
     Workout(2022,7,14,'Romans',['barbell zercher squat','revo double alternate staggered deadlift','power bands track side walks','kettlebell deadlift pause','activation bands dumbbell goblet squat','slides reverse lunge','ybell double clean + squat outer grip','soft box single leg sandbag hip thruster','balance trainer crunch']),
     Workout(2022,7,15,'T10',['ski erg standing alternate arm pulls','chin up mixed grip','ybell single sprawl','deadball lying chest press','bike erg standing','kettlebell sumo deadlift','soft box 10 x high knees box jump','dumbbell stationary lunge','step trainer jump on-off + 4 x shuffle','revo reverse curl']),
@@ -59,6 +28,8 @@ let workoutsByDate = [
     Workout(2022,7,17,'Pegasus',['dumbbell bench pull overs','barbell romanian deadlift + underhand grip row','ybell double alternate reverse lunge outer grip','suspension trainer archer push ups','sandbag sumo squat','dumbbell crucifix curl','ybell single crunch + extension','box dumbbell step up','power band shoulder press','kettlebell double clean + press','plate overhead walking lunge','barbell windscreen wipers','yogy push up','flutter kick','staggered squat jump'])
 
 ]
+
+let workoutStyleList = [...new Set(workoutsByDate.map(workout=>workout.displayStyle))].sort();
 
 function getWorkoutByDate(date) {
     const datesMatch = (date1,date2) => date1.getDate()===date2.getDate();
@@ -69,6 +40,8 @@ function getWorkoutByDate(date) {
     return workoutsByDate.find(workout=>areDatesEqual(workout.date,date)) || {date};
 }
 
+const getLastWorkoutByStyle = (displayStyle) => workoutsByDate.filter(workout=>workout.displayStyle===displayStyle).sort((workoutA,workoutB)=>workoutA.date-workoutB.date).pop();
+
 export {
     // aircraftList, 
     // getAcftById,
@@ -77,5 +50,6 @@ export {
     // getInstById,
     workoutStyleList,
     workoutsByDate,
-    getWorkoutByDate
+    getWorkoutByDate,
+    getLastWorkoutByStyle
 };

@@ -1,16 +1,12 @@
 import React from 'react';
 import './DaySquare.css'
-import {getWorkoutByDate} from '../helpers/lists.js';
+import {getWorkoutByDate, workoutsByDate} from '../helpers/lists.js';
 import defaultLogo from '../F45_logos/defaultLogo.png';
 
 export default function DaySquare(props) {
     const date = props.date;
+    const [workouts, setWorkouts] = props.useWorkouts
     
-    // const datesMatch = (date1,date2) => date1.getDate()===date2.getDate();
-    // const monthsMatch = (date1,date2) => date1.getMonth()===date2.getMonth();
-    // const yearsMatch = (date1,date2) => date1.getFullYear()===date2.getFullYear();
-    // const areDatesEqual = (date1,date2) => datesMatch(date1,date2) && monthsMatch(date1,date2) && yearsMatch(date1,date2);
-
     const workout = getWorkoutByDate(date);
  
     const logo = workout.logo ? workout.logo : defaultLogo;
@@ -18,7 +14,7 @@ export default function DaySquare(props) {
     const noWorkout = workout ? '' : ' no-workout'
 
     return (
-        <div className={props.activeDay + ' daySquare'} onClick={()=>props.setWorkout(getWorkoutByDate(new Date(date)))}>
+        <div className={props.activeDay + ' daySquare'} title={workout.displayStyle} onClick={()=>setWorkouts({...workouts, byDate: workout})}>
             <div className="weekday">
                 {date.toLocaleString(undefined,{weekday: 'short'})}
             </div>

@@ -5,16 +5,17 @@ import {getWorkoutByDate} from '../helpers/lists.js';
 
 export default function DatePicker(props) {
     // const [displayCalendar,setDisplayCalendar] = useState(false);
-    const [workout, setWorkout] = props.useWorkout;
+    const [workouts, setWorkouts] = props.useWorkouts;
+    const workout = workouts.byDate;
     
     const changeWeek = (e) => {
         const newDate = new Date(workout.date);
         newDate.setDate(newDate.getDate()+ 7*+e.target.value);
-        setWorkout(getWorkoutByDate(newDate));
+        setWorkouts({...workouts, byDate: getWorkoutByDate(newDate)});
     }
        
     const setToday = (e) => {
-        setWorkout(getWorkoutByDate(new Date()));
+        setWorkouts({...workouts, byDate:getWorkoutByDate(new Date())});
     }
     
     const currentYear = new Date().getFullYear();
@@ -71,7 +72,7 @@ export default function DatePicker(props) {
                         {week.map(day => {
                             const activeDay = day.getDay()===workout.date.getDay() ? 'active-day' : '';
                             return (
-                                <DaySquare key={day.getDay()} date={day} activeDay={activeDay} setWorkout={setWorkout}/>
+                                <DaySquare key={day.getDay()} date={day} activeDay={activeDay} useWorkouts={props.useWorkouts}/>
                             )
                         })}
                     </div>

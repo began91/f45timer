@@ -1,7 +1,7 @@
 import images from './images.js';
 
 
-export default function Workout(year,month,day,workoutStyle, stationList = []) {
+export default function WorkoutCreator(year,month,day,workoutStyle, stationList = []) {
     let style=workoutStyle;
     let displayStyle = style;
     let stations = null;
@@ -225,6 +225,8 @@ export default function Workout(year,month,day,workoutStyle, stationList = []) {
             }
             break;
         case 'Trackstars':
+        case 'Track Stars':
+            displayStyle = 'Track Stars';
             stations = 18;
             pods = 1;
             laps = 1;
@@ -244,6 +246,8 @@ export default function Workout(year,month,day,workoutStyle, stationList = []) {
             }
             break;
         case 'Tripledouble':
+        case 'Triple Double':
+            displayStyle = 'Triple Double';
             stations = 9;
             pods = 1;
             laps = 2; //2 per pod?
@@ -266,13 +270,14 @@ export default function Workout(year,month,day,workoutStyle, stationList = []) {
                 0,1,0,1,0,1, 0,1,0,1,0,1, 0,1,0,1,0];
             break;
         case 'Westhollywood':
+        case 'West Hollywood':
+            displayStyle = 'West Hollywood';
             stations = 27;
             pods = 1;
             laps = 2;
             sets = 1;
-            timing = 'First lap:45/15, Second Lap: 35/15'
+            timing = 'First lap: 45/15, Second Lap: 35/15'
             timeList = [45, 35, 15];
-            displayStyle = 'West Hollywood';
             for (let i=0; i<numSets(sets,stations,laps); i++) {
                 let lap = Math.floor(i/(stations*2));
                 let stationWithinLap = Math.floor((i%(stations*2))/2);

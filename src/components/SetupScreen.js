@@ -9,18 +9,19 @@ export default function SetupScreen(props) {
 
     return (
         <div id="setupScreen">
-            <SetupOptions view={props.setupView} onViewChange={props.onViewChange}/>
+            <SetupOptions useView={props.useView}/>
             
-            {props.setupView==='custom' ? 
-            (<CustomWorkoutSetup useWorkout={props.useWorkout}/>) 
+            {props.useView[0]==='custom' ? 
+            (<CustomWorkoutSetup useWorkouts={props.useWorkouts}/>) 
             : 
-            (<WorkoutByDateSetup useWorkout={props.useWorkout}/>)
+            (<WorkoutByDateSetup useWorkouts={props.useWorkouts}/>)
             }
+
             <button id="startWorkout" onClick={()=>{
                 props.setWorkoutStatus(true);
                 props.snd.src = Beep;
                 props.snd.play();
-                }} disabled={!props.useWorkout[0].stationList}>Start Workout</button>
+                }} disabled={!props.useWorkouts[0][props.useView[0]].stationList}>Start Workout</button>
         </div>        
     )
 }

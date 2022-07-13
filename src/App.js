@@ -10,10 +10,12 @@ import {getWorkoutByDate} from './helpers/lists.js';
 
 export default function App(props) {
   const [workoutStatus, setWorkoutStatus] = useState(false);
-  const [setupView, setSetupView] = useState('byDate');
+  const useSetupView = useState('byDate');
   const snd = useState(new Audio("data:audio/mpeg;base64,SUQzBAAAAAABEVRYWFgAAAAtAAADY29tbWVudABCaWdTb3VuZEJhbmsuY29tIC8gTGFTb25vdGhlcXVlLm9yZwBURU5DAAAAHQAAA1N3aXRjaCBQbHVzIMKpIE5DSCBTb2Z0d2FyZQBUSVQyAAAABgAAAzIyMzUAVFNTRQAAAA8AAANMYXZmNTcuODMuMTAwAAAAAAAAAAAAAAD/80DEAAAAA0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQsRbAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQMSkAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV"))
 
-  const useWorkout = useState(getWorkoutByDate(new Date()))
+  const useWorkouts = useState({
+    byDate: getWorkoutByDate(new Date()),
+    custom: getWorkoutByDate(new Date())})
 
   // snd.autoplay = true;
   // snd.src = ;
@@ -23,9 +25,8 @@ export default function App(props) {
     <div className="App">
       <div id="mainScreen">
         {workoutStatus ? 
-        (<WorkoutScreen setWorkoutStatus={setWorkoutStatus} workout={useWorkout[0]} snd={snd[0]}/>) : 
-        (<SetupScreen setWorkoutStatus={setWorkoutStatus} useWorkout={useWorkout}
-        setupView={setupView} onViewChange={setSetupView} snd={snd[0]}/>)}
+        (<WorkoutScreen setWorkoutStatus={setWorkoutStatus} workout={useWorkouts[0][useSetupView[0]]} snd={snd[0]}/>) : 
+        (<SetupScreen setWorkoutStatus={setWorkoutStatus} useWorkouts={useWorkouts} useView={useSetupView} snd={snd[0]}/>)}
       </div>
 
     </div>

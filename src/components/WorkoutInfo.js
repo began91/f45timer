@@ -4,15 +4,23 @@ import './WorkoutInfo.css';
 // import StationList from './StationList.js';
 
 export default function WorkoutInfo(props) {
-    const [workout,setWorkout] = props.useWorkout;
+    const [workouts,setWorkouts] = props.useWorkouts;
+    const workout = workouts[props.view];
 
     const handleChange = (e) => {
-        e.target.style.height = 'inherit';
-        e.target.style.height = (+e.target.scrollHeight-5) + 'px';
+        if (e.target.tagName==='LI') {
+            e.target.style.height = 'inherit';
+            e.target.style.height = (+e.target.scrollHeight-5) + 'px';
+        }
         let i = e.target.id.split('_').pop();
         let newStationList = workout.stationList;
         newStationList[i] = e.target.value;
-        setWorkout({...workout, stationList: newStationList})
+        setWorkouts({...workouts, [props.view]: {...workout, stationList: newStationList}})
+    }
+
+    const clearAll = e => {
+        let newStationList = workout.stationList.map((station,i)=>i<workout.stations?'':station)
+        setWorkouts({...workouts, [props.view]: {...workout, stationList: newStationList}})
     }
 
     useEffect(()=>{
@@ -59,9 +67,16 @@ export default function WorkoutInfo(props) {
                     {workout.misc}
                 </div>
                 <ol id='stationList'>
+                {props.view==='custom' ? (
+                    <div>
+                        Here's the most recent {workout.displayStyle} workout:
+                    </div>
+                ) : ''}
+                <button className='clear-all' onClick={clearAll}>Clear All Stations</button>
                     {workout.stationList.filter((_,i)=>i<workout.stations).map((station,i)=>(
                         <li className='station-item' key={i}>
-                            <textarea type='text' rows='1' id={'station_'+i} value={station} onChange={handleChange} className='station-input'></textarea>
+                            <textarea type='search' rows='1' id={'station_'+i} value={station} onChange={handleChange} className='station-input'></textarea>
+                            <button value='' id={'station_'+i} className='clear-station' onClick={handleChange}>X</button>
                         </li>
                     ))}
                 </ol>
