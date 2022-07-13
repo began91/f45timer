@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/f45timer/static/css/main.1975a232.css",
-    "main.js": "/f45timer/static/js/main.d09567bf.js",
+    "main.css": "/f45timer/static/css/main.4037e9c9.css",
+    "main.js": "/f45timer/static/js/main.742d8627.js",
     "static/js/787.83a9efd1.chunk.js": "/f45timer/static/js/787.83a9efd1.chunk.js",
     "static/media/hollywood.png": "/f45timer/static/media/hollywood.1ca154aec3d167d210bc.png",
     "static/media/redline.jpg": "/f45timer/static/media/redline.7ff03f11b44b1b5fbc11.jpg",
@@ -55,12 +55,12 @@
     "static/media/varsity.png": "/f45timer/static/media/varsity.2185f714d485da24b462.png",
     "static/media/socal.jpg": "/f45timer/static/media/socal.2e284a8aea628add687d.jpg",
     "index.html": "/f45timer/index.html",
-    "main.1975a232.css.map": "/f45timer/static/css/main.1975a232.css.map",
-    "main.d09567bf.js.map": "/f45timer/static/js/main.d09567bf.js.map",
+    "main.4037e9c9.css.map": "/f45timer/static/css/main.4037e9c9.css.map",
+    "main.742d8627.js.map": "/f45timer/static/js/main.742d8627.js.map",
     "787.83a9efd1.chunk.js.map": "/f45timer/static/js/787.83a9efd1.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1975a232.css",
-    "static/js/main.d09567bf.js"
+    "static/css/main.4037e9c9.css",
+    "static/js/main.742d8627.js"
   ]
 }
