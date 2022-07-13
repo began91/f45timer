@@ -106,6 +106,28 @@ export default function Workout(year,month,day,workoutStyle, stationList = []) {
                 }
             }
             break;
+        case 'Pegasus':
+            stations = 15;
+            pods = 1;
+            laps = 1;
+            sets = 3;
+            timing = '30 resistance / 20 bodyweight / 15 rest';
+            timeList = [30, 20, 15];
+            misc = '12 resistance stations. Each set followed by one of three bodyweight workouts (stations 13, 14, & 15 below) before rest.';
+            for (let i=0; i<(9*12-1);i++) {
+                timeIndex[i] = i%3; //cycle through the three times continuously
+                let setOfThree = Math.floor(i/3) % 3;
+                if (i%3===0) { //resistance set
+                    stationIndex[i] = Math.floor(i/9);
+                } else if (i%3===1) { //bodyweight set
+                    stationIndex[i] = setOfThree + 12;
+                } else if (setOfThree===0 || setOfThree===1) { //i%3===2 && rest set 1 + 2
+                    stationIndex[i] = stations;
+                } else { //rest set 3
+                    stationIndex[i] = stations + 1;
+                }
+            }       
+            break;
         case 'Piston':
             stations = 12;
             pods = 1;
@@ -151,6 +173,23 @@ export default function Workout(year,month,day,workoutStyle, stationList = []) {
                 if ((i+1)%(sets*laps*pods*2)===0) {//60 sec breaks (should be 2 total)
                     timeIndex[i]=2;
                     // stationIndex[i] = stations+1;//might change to +2 and add "next pod" later
+                }
+            }
+            break;
+        case 'T10':
+            stations = 10;
+            pods = 1;
+            laps = 4;
+            sets = 1;
+            timing = '40/10';
+            timeList = [40, 10];
+            misc = 'Exercises alternate between cardio and strength';
+            for (let i=0; i < numSets(sets,stations,laps); i++) {
+                timeIndex[i] = i%2;
+                if (i%2===0) { //work set
+                    stationIndex[i] = Math.floor(i%(2*stations)/2);
+                } else {//rest set
+                    stationIndex[i] = stations + 1; //all next station
                 }
             }
             break;
@@ -201,6 +240,48 @@ export default function Workout(year,month,day,workoutStyle, stationList = []) {
                 } else {
                     //rest sets
                     stationIndex[i] = stations + ((i%4) - 1)/2;
+                }
+            }
+            break;
+        case 'Tripledouble':
+            stations = 9;
+            pods = 1;
+            laps = 2; //2 per pod?
+            sets = 3;
+            timing = '30/10 30/10 30/10';
+            timeList = [30, 10, 60];
+            misc = '1 minute hydration between laps.'
+            stationIndex = [0,9,0,9,0,10, 1,9,1,9,1,10, 2,9,2,9,2,10,
+                3,9,3,9,3,10, 4,9,4,9,4,10, 5,9,5,9,5,10,
+                6,9,6,9,6,10, 7,9,7,9,7,10, 8,9,8,9,8,10,
+                0,9,0,9,0,10, 1,9,1,9,1,10, 2,9,2,9,2,10,
+                3,9,3,9,3,10, 4,9,4,9,4,10, 5,9,5,9,5,10,
+                6,9,6,9,6,10, 7,9,7,9,7,10, 8,9,8,9,8]
+
+            timeIndex = [0,1,0,1,0,1, 0,1,0,1,0,1, 0,1,0,1,0,1,
+                0,1,0,1,0,1, 0,1,0,1,0,1, 0,1,0,1,0,1,
+                0,1,0,1,0,1, 0,1,0,1,0,1, 0,1,0,1,0,2,
+                0,1,0,1,0,1, 0,1,0,1,0,1, 0,1,0,1,0,1,
+                0,1,0,1,0,1, 0,1,0,1,0,1, 0,1,0,1,0,1,
+                0,1,0,1,0,1, 0,1,0,1,0,1, 0,1,0,1,0];
+            break;
+        case 'Westhollywood':
+            stations = 27;
+            pods = 1;
+            laps = 2;
+            sets = 1;
+            timing = 'First lap:45/15, Second Lap: 35/15'
+            timeList = [45, 35, 15];
+            displayStyle = 'West Hollywood';
+            for (let i=0; i<numSets(sets,stations,laps); i++) {
+                let lap = Math.floor(i/(stations*2));
+                let stationWithinLap = Math.floor((i%(stations*2))/2);
+                if (i%2===0) { //work set
+                    stationIndex[i] = stationWithinLap;
+                    timeIndex[i] = lap;
+                } else {//rest set
+                    timeIndex[i] = 2;
+                    stationIndex[i] = Math.floor((i%4)/2) + stations;
                 }
             }
             break;

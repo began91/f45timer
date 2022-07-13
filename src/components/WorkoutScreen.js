@@ -177,8 +177,8 @@ export default function WorkoutScreen (props) {
                 <div className="workout-stats">
                     Workout Complete!<br/>
                     Total Time: {timeString(mainTimer)}<br/>
-                    <button onClick={resetWorkout}>Reset</button>
-                    <button onClick={()=>props.setWorkoutStatus(false)}>End Workout</button>
+                    <button onClick={resetWorkout}>Reset Workout</button>
+                    <button onClick={()=>props.setWorkoutStatus(false)}>Return to Menu</button>
                 </div>
             ): (
                 <>
@@ -191,7 +191,7 @@ export default function WorkoutScreen (props) {
                                         {timeStringSec(currentSetDuration-setTimer)}</div>
                                 </div>
                             </div>
-                            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="120px" height="120px" style={{strokeDashoffset: percentComplete*440/100}}>
+                            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="120px" height="120px" style={{strokeDashoffset: percentComplete*320/100}}>
                                 <defs>
                                     <linearGradient id="GradientColor">
                                         <stop offset="0%" stopColor="aqua" />

@@ -247,7 +247,7 @@ circle {
     fill: none;
     stroke: url(#GradientColor);
     stroke-width: 20;
-    stroke-dasharray: 440;
+    stroke-dasharray: 312;
     transition: stroke-dashoffset .4s;
 }
 

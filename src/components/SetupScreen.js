@@ -20,7 +20,7 @@ export default function SetupScreen(props) {
                 props.setWorkoutStatus(true);
                 props.snd.src = Beep;
                 props.snd.play();
-                }}>Start Workout</button>
+                }} disabled={!props.useWorkout[0].stationList}>Start Workout</button>
         </div>        
     )
 }

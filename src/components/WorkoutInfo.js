@@ -29,7 +29,7 @@ export default function WorkoutInfo(props) {
             ): 
             (<div id='workoutInfo'>
                 <div className='workout-info-label'>Style: </div>
-                <div id="workoutStyle" className='workout-info-data'>{workout.style}</div>
+                <div id="workoutStyle" className='workout-info-data'>{workout.displayStyle}</div>
                 <div className='workout-info-label'>Stations: </div>
                 <div id="workoutStations" className='workout-info-data'>
                     {workout.stations}

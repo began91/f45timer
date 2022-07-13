@@ -1,6 +1,7 @@
 import three_peat from '../F45_logos/3-peat.png';
 import twenty_two from '../F45_logos/22.png';
 import Abacus from '../F45_logos/abacus.png';
+import Afterglow from '../F45_logos/afterglow.jpg';
 import Allstar from '../F45_logos/allstar.png';
 import Athletica from '../F45_logos/athletica.png';
 import Bears from '../F45_logos/bears.png';
@@ -20,6 +21,7 @@ import Hollywood from '../F45_logos/hollywood.png';
 import Iceberg from '../F45_logos/iceberg.jpg';
 import Joker from '../F45_logos/joker.jpg';
 import Liberty from '../F45_logos/liberty.png';
+import Lonestar from '../F45_logos/lonestar.jpg';
 import Loyals from '../F45_logos/loyals.png';
 import Miaminights from '../F45_logos/miaminights.png';
 import Mkatz from '../F45_logos/mkatz.png';
@@ -40,8 +42,10 @@ import Romans from '../F45_logos/romans.png';
 import Socal from '../F45_logos/socal.jpg';
 import Soho from '../F45_logos/soho.png';
 import T10 from '../F45_logos/t10.png';
+import Tempest from '../F45_logos/tempest.jpg';
 import Templars from '../F45_logos/templars.png';
 import Tokyodisco from '../F45_logos/tokyodisco.png';
+import Trackstars from '../F45_logos/trackstars.png';
 import Tripledouble from '../F45_logos/tripledouble.png';
 import Triplethreat from '../F45_logos/triplethreat.jpg';
 import Varsity from '../F45_logos/varsity.png';
@@ -52,6 +56,7 @@ const images = {
     '3-peat': three_peat,
     '22': twenty_two,
     Abacus,
+    Afterglow,
     Allstar,
     Athletica,
     Bears,
@@ -71,6 +76,7 @@ const images = {
     Iceberg,
     Joker,
     Liberty,
+    Lonestar,
     Loyals,
     Miaminights,
     Mkatz,
@@ -91,8 +97,10 @@ const images = {
     Socal,
     Soho,
     T10,
+    Tempest,
     Templars,
     Tokyodisco,
+    Trackstars,
     Tripledouble,
     Triplethreat,
     Varsity,
